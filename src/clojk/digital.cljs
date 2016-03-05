@@ -14,6 +14,21 @@
    [:path {:class ["segment" "segment-f" (:f segment-classes segment-default)] :d "M8,10L12,14L12,42L8,46L4,42L4,14L8,10z"}]
    [:path {:class ["segment" "segment-g" (:g segment-classes segment-default)] :d "M10,48L14,44L42,44L46,48L42,52L14,52L10,48z"}]])
 
+(def digit-to-classes
+  {1 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
+   2 {:a "lit" :b "lit" :c "off" :d "lit" :e "lit" :f "off" :g "lit"}
+   3 {:a "lit" :b "lit" :c "lit" :d "lit" :e "off" :f "off" :g "lit"}
+   4 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "lit" :g "lit"}
+   5 {:a "lit" :b "off" :c "lit" :d "lit" :e "off" :f "lit" :g "lit"}
+   6 {:a "lit" :b "off" :c "lit" :d "lit" :e "lit" :f "lit" :g "lit"}
+   7 {:a "lit" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
+   8 {:a "lit" :b "lit" :c "lit" :d "lit" :e "lit" :f "lit" :g "lit"}
+   9 {:a "lit" :b "lit" :c "lit" :d "lit" :e "off" :f "lit" :g "lit"}
+   0 {:a "lit" :b "lit" :c "lit" :d "lit" :e "lit" :f "lit" :g "off"}})
+
+(defn digit-display [class digit]
+  (seven-segment-display class (get digit-to-classes digit) nil))
+
 (defcard seven-segment-display
   (sab/html [:div {:class "segment-display"}
              [:svg {:width 375 :height 96 :viewBox "0 0 375 96"}
@@ -25,6 +40,20 @@
              [:svg {:width 375 :height 96 :viewBox "0 0 375 96"}
               [:g {:transform "translate(17,0)"}
                (seven-segment-display "ssd" {} "lit")]]]))
+
+(defcard digits
+  (sab/html [:div {:class "segment-display"}
+             [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
+              [:g {:transform "translate(  0,0)"} (digit-display "ssd" 1)]
+              [:g {:transform "translate( 60,0)"} (digit-display "ssd" 2)]
+              [:g {:transform "translate(120,0)"} (digit-display "ssd" 3)]
+              [:g {:transform "translate(180,0)"} (digit-display "ssd" 4)]
+              [:g {:transform "translate(240,0)"} (digit-display "ssd" 5)]
+              [:g {:transform "translate(300,0)"} (digit-display "ssd" 6)]
+              [:g {:transform "translate(360,0)"} (digit-display "ssd" 7)]
+              [:g {:transform "translate(420,0)"} (digit-display "ssd" 8)]
+              [:g {:transform "translate(480,0)"} (digit-display "ssd" 9)]
+              [:g {:transform "translate(540,0)"} (digit-display "ssd" 0)]]]))
 
 
 ; <svg >
