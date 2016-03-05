@@ -1,7 +1,8 @@
 (ns clojk.core
   (:require
    #_[om.core :as om :include-macros true]
-   [sablono.core :as sab :include-macros true])
+   [sablono.core :as sab :include-macros true]
+   [clojk.digital])
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 
@@ -21,4 +22,3 @@
 
 ;; remember to run lein figwheel and then browse to
 ;; http://localhost:3449/cards.html
-

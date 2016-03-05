@@ -1,1 +1,11 @@
 /* clojk CSS */
+.segment-display svg path {
+	fill: #eee;
+	stroke: #5f0;
+	stroke-opacity: 0;
+}
+
+.segment-display svg path.lit {
+	fill: #0e0;
+	stroke-opacity: 1;
+}
