@@ -14,6 +14,11 @@
    [:path {:class ["segment" "segment-f" (:f segment-classes segment-default)] :d "M8,10L12,14L12,42L8,46L4,42L4,14L8,10z"}]
    [:path {:class ["segment" "segment-g" (:g segment-classes segment-default)] :d "M10,48L14,44L42,44L46,48L42,52L14,52L10,48z"}]])
 
+(defn separator [class]
+  [:g {:class class}
+   [:circle {:r 4 :cx 0 :cy 28}]
+   [:circle {:r 4 :cx 0 :cy 68}]])
+
 (def digit-to-classes
   {1 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
    2 {:a "lit" :b "lit" :c "off" :d "lit" :e "lit" :f "off" :g "lit"}
@@ -32,14 +37,16 @@
 (defcard seven-segment-display
   (sab/html [:div {:class "segment-display"}
              [:svg {:width 375 :height 96 :viewBox "0 0 375 96"}
-              [:g {:transform "translate(17,0)"}
-               (seven-segment-display "ssd" {} "off")]]]))
+              [:g {:transform "translate(0,0)"}
+               (seven-segment-display "ssd" {} "off")
+               [:g {:transform "translate( 60,0)"} (separator "separator off")]]]]))
 
 (defcard seven-segment-display-lit
   (sab/html [:div {:class "segment-display"}
              [:svg {:width 375 :height 96 :viewBox "0 0 375 96"}
-              [:g {:transform "translate(17,0)"}
-               (seven-segment-display "ssd" {} "lit")]]]))
+              [:g {:transform "translate(0,0)"}
+               (seven-segment-display "ssd" {} "lit")
+               [:g {:transform "translate( 60,0)"} (separator "separator lit")]]]]))
 
 (defcard digits
   (sab/html [:div {:class "segment-display"}
