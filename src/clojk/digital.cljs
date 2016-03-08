@@ -4,6 +4,9 @@
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 
+(defn str->digits [s]
+  (map {\0 0 \1 1 \2 2 \3 3 \4 4 \5 5 \6 6 \7 7 \8 8 \9 9} s))
+
 (defn seven-segment-display [class segment-classes segment-default]
   [:g {:class class}
    [:path {:class ["segment" "segment-a" (:a segment-classes segment-default)] :d "M10,8L14,4L42,4L46,8L42,12L14,12L10,8z"}]
@@ -62,6 +65,12 @@
               [:g {:transform "translate(480,0)"} (digit-display "ssd" 9)]
               [:g {:transform "translate(540,0)"} (digit-display "ssd" 0)]]]))
 
+(defcard number-strings
+  (sab/html [:div {:class "segment-display"}
+             [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
+              (map-indexed
+               (fn [idx itm] [:g {:key idx :transform (str "translate(" (* 60 idx) ",0)")} (digit-display "ssd" itm)])
+               (str->digits "0123456789"))]]))
 
 ; <svg >
 ;   <g transform="translate(17,0)">
