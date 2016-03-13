@@ -4,9 +4,6 @@
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 
-(defn str->digits [s]
-  (map {\0 0 \1 1 \2 2 \3 3 \4 4 \5 5 \6 6 \7 7 \8 8 \9 9} s))
-
 (defn seven-segment-display [class segment-classes segment-default]
   [:g {:class class}
    [:path {:class ["segment" "segment-a" (:a segment-classes segment-default)] :d "M10,8L14,4L42,4L46,8L42,12L14,12L10,8z"}]
@@ -23,16 +20,16 @@
    [:circle {:r 4 :cx 0 :cy 68}]])
 
 (def digit-to-classes
-  {1 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
-   2 {:a "lit" :b "lit" :c "off" :d "lit" :e "lit" :f "off" :g "lit"}
-   3 {:a "lit" :b "lit" :c "lit" :d "lit" :e "off" :f "off" :g "lit"}
-   4 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "lit" :g "lit"}
-   5 {:a "lit" :b "off" :c "lit" :d "lit" :e "off" :f "lit" :g "lit"}
-   6 {:a "lit" :b "off" :c "lit" :d "lit" :e "lit" :f "lit" :g "lit"}
-   7 {:a "lit" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
-   8 {:a "lit" :b "lit" :c "lit" :d "lit" :e "lit" :f "lit" :g "lit"}
-   9 {:a "lit" :b "lit" :c "lit" :d "lit" :e "off" :f "lit" :g "lit"}
-   0 {:a "lit" :b "lit" :c "lit" :d "lit" :e "lit" :f "lit" :g "off"}})
+  {\1 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
+   \2 {:a "lit" :b "lit" :c "off" :d "lit" :e "lit" :f "off" :g "lit"}
+   \3 {:a "lit" :b "lit" :c "lit" :d "lit" :e "off" :f "off" :g "lit"}
+   \4 {:a "off" :b "lit" :c "lit" :d "off" :e "off" :f "lit" :g "lit"}
+   \5 {:a "lit" :b "off" :c "lit" :d "lit" :e "off" :f "lit" :g "lit"}
+   \6 {:a "lit" :b "off" :c "lit" :d "lit" :e "lit" :f "lit" :g "lit"}
+   \7 {:a "lit" :b "lit" :c "lit" :d "off" :e "off" :f "off" :g "off"}
+   \8 {:a "lit" :b "lit" :c "lit" :d "lit" :e "lit" :f "lit" :g "lit"}
+   \9 {:a "lit" :b "lit" :c "lit" :d "lit" :e "off" :f "lit" :g "lit"}
+   \0 {:a "lit" :b "lit" :c "lit" :d "lit" :e "lit" :f "lit" :g "off"}})
 
 (defn digit-display [class digit]
   (seven-segment-display class (get digit-to-classes digit) nil))
@@ -54,23 +51,23 @@
 (defcard digits
   (sab/html [:div {:class "segment-display"}
              [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
-              [:g {:transform "translate(  0,0)"} (digit-display "ssd" 1)]
-              [:g {:transform "translate( 60,0)"} (digit-display "ssd" 2)]
-              [:g {:transform "translate(120,0)"} (digit-display "ssd" 3)]
-              [:g {:transform "translate(180,0)"} (digit-display "ssd" 4)]
-              [:g {:transform "translate(240,0)"} (digit-display "ssd" 5)]
-              [:g {:transform "translate(300,0)"} (digit-display "ssd" 6)]
-              [:g {:transform "translate(360,0)"} (digit-display "ssd" 7)]
-              [:g {:transform "translate(420,0)"} (digit-display "ssd" 8)]
-              [:g {:transform "translate(480,0)"} (digit-display "ssd" 9)]
-              [:g {:transform "translate(540,0)"} (digit-display "ssd" 0)]]]))
+              [:g {:transform "translate(  0,0)"} (digit-display "ssd" \1)]
+              [:g {:transform "translate( 60,0)"} (digit-display "ssd" \2)]
+              [:g {:transform "translate(120,0)"} (digit-display "ssd" \3)]
+              [:g {:transform "translate(180,0)"} (digit-display "ssd" \4)]
+              [:g {:transform "translate(240,0)"} (digit-display "ssd" \5)]
+              [:g {:transform "translate(300,0)"} (digit-display "ssd" \6)]
+              [:g {:transform "translate(360,0)"} (digit-display "ssd" \7)]
+              [:g {:transform "translate(420,0)"} (digit-display "ssd" \8)]
+              [:g {:transform "translate(480,0)"} (digit-display "ssd" \9)]
+              [:g {:transform "translate(540,0)"} (digit-display "ssd" \0)]]]))
 
 (defcard number-strings
   (sab/html [:div {:class "segment-display"}
              [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
               (map-indexed
                (fn [idx itm] [:g {:key idx :transform (str "translate(" (* 60 idx) ",0)")} (digit-display "ssd" itm)])
-               (str->digits "0123456789"))]]))
+               (str "0123456789"))]]))
 
 ; <svg >
 ;   <g transform="translate(17,0)">
