@@ -41,6 +41,16 @@
       (digit-display itm)])
    (str digits)))
 
+(defn clock-display [h m s sep]
+  (sab/html [:div {:class "segment-display"}
+             [:svg {:width 410 :height 96 :viewBox "0 0 410 96"}
+              [:g {:transform "skewX(-9)"}
+               [:g {:transform "translate( 15,0)"} (digits-display h)]
+               [:g {:transform "translate(143,0)"} (separator sep)]
+               [:g {:transform "translate(155,0)"} (digits-display m)]
+               [:g {:transform "translate(283,0)"} (separator sep)]
+               [:g {:transform "translate(295,0)"} (digits-display s)]]]]))
+
 ; ----------------------------------------------------
 
 (defcard seven-segment-display
@@ -76,71 +86,5 @@
              [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
               (digits-display "0123456789")]]))
 
-(defcard clock-display
-  (sab/html [:div {:class "segment-display"}
-             [:svg {:width 400 :height 96 :viewBox "0 0 400 96"}
-              [:g {:transform "translate(  0,0)"} (digits-display "00")]
-              [:g {:transform "translate(128,0)"} (separator "lit")]
-              [:g {:transform "translate(140,0)"} (digits-display "00")]
-              [:g {:transform "translate(268,0)"} (separator "lit")]
-              [:g {:transform "translate(280,0)"} (digits-display "00")]]]))
-
-
-
-; <svg >
-;   <g transform="translate(17,0)">
-;     <g class="digit" transform="skewX(-12)">
-;       <path d="M66,8L70,4L98,4L102,8L98,12L70,12L66,8z"/>
-;       <path d="M64,10L68,14L68,42L64,46L60,42L60,14L64,10z"/>
-;       <path d="M104,10L108,14L108,42L104,46L100,42L100,14L104,10z"/>
-;       <path d="M66,48L70,44L98,44L102,48L98,52L70,52L66,48z"/>
-;       <path d="M64,50L68,54L68,82L64,86L60,82L60,54L64,50z"/>
-;       <path d="M104,50L108,54L108,82L104,86L100,82L100,54L104,50z"/>
-;       <path d="M66,88L70,84L98,84L102,88L98,92L70,92L66,88z"/>
-;     </g>
-;     <g class="separator">
-;       <circle r="4" cx="112" cy="28"/>
-;       <circle r="4" cx="103.5" cy="68"/>
-;     </g>
-;     <g class="digit" transform="skewX(-12)">
-;       <path d="M134,8L138,4L166,4L170,8L166,12L138,12L134,8z"/>
-;       <path d="M132,10L136,14L136,42L132,46L128,42L128,14L132,10z"/>
-;       <path d="M172,10L176,14L176,42L172,46L168,42L168,14L172,10z"/>
-;       <path d="M134,48L138,44L166,44L170,48L166,52L138,52L134,48z"/>
-;       <path d="M132,50L136,54L136,82L132,86L128,82L128,54L132,50z"/>
-;       <path d="M172,50L176,54L176,82L172,86L168,82L168,54L172,50z"/>
-;       <path d="M134,88L138,84L166,84L170,88L166,92L138,92L134,88z"/>
-;     </g>
-;     <g class="digit" transform="skewX(-12)">
-;       <path d="M190,8L194,4L222,4L226,8L222,12L194,12L190,8z"/>
-;       <path d="M188,10L192,14L192,42L188,46L184,42L184,14L188,10z"/>
-;       <path d="M228,10L232,14L232,42L228,46L224,42L224,14L228,10z"/>
-;       <path d="M190,48L194,44L222,44L226,48L222,52L194,52L190,48z"/>
-;       <path d="M188,50L192,54L192,82L188,86L184,82L184,54L188,50z"/>
-;       <path d="M228,50L232,54L232,82L228,86L224,82L224,54L228,50z"/>
-;       <path d="M190,88L194,84L222,84L226,88L222,92L194,92L190,88z"/>
-;     </g>
-;     <g class="separator">
-;       <circle r="4" cx="236" cy="28"/>
-;       <circle r="4" cx="227.5" cy="68"/>
-;     </g>
-;     <g class="digit" transform="skewX(-12)">
-;       <path d="M258,8L262,4L290,4L294,8L290,12L262,12L258,8z"/>
-;       <path d="M256,10L260,14L260,42L256,46L252,42L252,14L256,10z"/>
-;       <path d="M296,10L300,14L300,42L296,46L292,42L292,14L296,10z"/>
-;       <path d="M258,48L262,44L290,44L294,48L290,52L262,52L258,48z"/>
-;       <path d="M256,50L260,54L260,82L256,86L252,82L252,54L256,50z"/>
-;       <path d="M296,50L300,54L300,82L296,86L292,82L292,54L296,50z"/>
-;       <path d="M258,88L262,84L290,84L294,88L290,92L262,92L258,88z"/>
-;     </g>
-;     <g class="digit" transform="skewX(-12)">
-;       <path d="M314,8L318,4L346,4L350,8L346,12L318,12L314,8z"/>
-;       <path d="M312,10L316,14L316,42L312,46L308,42L308,14L312,10z"/>
-;       <path d="M352,10L356,14L356,42L352,46L348,42L348,14L352,10z"/>
-;       <path d="M314,48L318,44L346,44L350,48L346,52L318,52L314,48z"/>
-;       <path d="M312,50L316,54L316,82L312,86L308,82L308,54L312,50z"/>
-;       <path d="M352,50L356,54L356,82L352,86L348,82L348,54L352,50z"/>
-;       <path d="M314,88L318,84L346,84L350,88L346,92L318,92L314,88z"/>
-;     </g>
-;   </g>
-; </svg>
+(defcard static-clock
+  (clock-display "12" "34" "56" "lit"))
