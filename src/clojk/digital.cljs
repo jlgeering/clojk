@@ -76,6 +76,16 @@
              [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
               (digits-display "0123456789")]]))
 
+(defcard clock-display
+  (sab/html [:div {:class "segment-display"}
+             [:svg {:width 400 :height 96 :viewBox "0 0 400 96"}
+              [:g {:transform "translate(  0,0)"} (digits-display "00")]
+              [:g {:transform "translate(128,0)"} (separator "lit")]
+              [:g {:transform "translate(140,0)"} (digits-display "00")]
+              [:g {:transform "translate(268,0)"} (separator "lit")]
+              [:g {:transform "translate(280,0)"} (digits-display "00")]]]))
+
+
 
 ; <svg >
 ;   <g transform="translate(17,0)">

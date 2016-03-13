@@ -2,7 +2,7 @@
 .segment-display svg path,
 .segment-display svg circle {
 	fill: #eee;
-	stroke: #5f0;
+	stroke: #0e0;
 	stroke-opacity: 0;
 }
 
