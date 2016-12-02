@@ -7,16 +7,16 @@
   :min-lein-version "2.5.3"
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.7.170"]
+                 [org.clojure/clojurescript "1.9.293"]
                  [com.andrewmcveigh/cljs-time "0.4.0"]
-                 [devcards "0.2.1-6"]
-                 [sablono "0.6.2"]
+                 [devcards "0.2.2"]
+                 [sablono "0.7.6"]
 
                  ;; need to specify this for sablono
                  ;; when not using devcards
-                 [cljsjs/react "0.14.3-0"]
-                 [cljsjs/react-dom "0.14.3-1"]
-                 [cljsjs/react-dom-server "0.14.3-0"]
+                 [cljsjs/react "15.4.0-0"]
+                 [cljsjs/react-dom "15.4.0-0"]
+                 [cljsjs/react-dom-server "15.4.0-0"]
 
                  #_[org.omcljs/om "0.9.0"]
                  #_[reagent "0.5.1"]]
