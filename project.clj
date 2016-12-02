@@ -8,6 +8,7 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.170"]
+                 [com.andrewmcveigh/cljs-time "0.4.0"]
                  [devcards "0.2.1-6"]
                  [sablono "0.6.2"]
 

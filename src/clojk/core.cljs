@@ -2,7 +2,8 @@
   (:require
    #_[om.core :as om :include-macros true]
    [sablono.core :as sab :include-macros true]
-   [clojk.digital])
+   [clojk.digital]
+   [clojk.tz])
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 

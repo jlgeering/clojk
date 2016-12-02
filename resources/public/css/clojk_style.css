@@ -11,3 +11,7 @@
 	fill: #0e0;
 	stroke-opacity: 1;
 }
+
+.time .seconds {
+	font-size: smaller;
+}
