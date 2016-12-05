@@ -103,3 +103,10 @@
       (clock-display (:h time) (:m time) (:s time) "lit")))
   state
   {:inspect-data true})
+
+(defcard current-time-local
+  (fn [data-atom _]
+    (let [now (ct/to-local (:time @data-atom))
+          time (ct/get-time now)]
+      (clock-display (:h time) (:m time) (:s time) "lit")))
+  state)

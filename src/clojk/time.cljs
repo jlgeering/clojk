@@ -4,6 +4,9 @@
    [cljs-time.format :as tf]
    [clojure.string :as str]))
 
+(defn to-local [dt]
+  (t/to-default-time-zone dt))
+
 (def custom-formatter (tf/formatter "HH mm ss"))
 (defn format-time [dt]
   (tf/unparse custom-formatter dt))

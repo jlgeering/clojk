@@ -39,3 +39,15 @@
                  [:span {:class "seconds"} (:s time)]])))
   state
   {:inspect-data true})
+
+(defcard current-time-local
+  (fn [data-atom _]
+    (sab/html (let [now (ct/to-local (:time @data-atom))
+                    time (ct/get-time now)]
+                [:div {:class "time"}
+                 [:span {:class "hours"} (:h time)]
+                 [:span ":"]
+                 [:span {:class "minutes"} (:m time)]
+                 [:span ":"]
+                 [:span {:class "seconds"} (:s time)]])))
+  state)
