@@ -1,6 +1,7 @@
 (ns clojk.tz
   (:require
    [cljs-time.core :as t]
+   [clojk.time :as ct]
    [sablono.core :as sab :include-macros true])
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
@@ -28,12 +29,13 @@
 
 (defcard current-time
   (fn [data-atom _]
-    (sab/html (let [now (:time @data-atom)]
+    (sab/html (let [now (:time @data-atom)
+                    time (ct/get-time now)]
                 [:div {:class "time"}
-                 [:span {:class "hours"} (t/hour now)]
+                 [:span {:class "hours"} (:h time)]
                  [:span ":"]
-                 [:span {:class "minutes"} (t/minute now)]
+                 [:span {:class "minutes"} (:m time)]
                  [:span ":"]
-                 [:span {:class "seconds"} (t/second now)]])))
+                 [:span {:class "seconds"} (:s time)]])))
   state
   {:inspect-data true})
