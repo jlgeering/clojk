@@ -1,7 +1,7 @@
 /* clojk CSS */
 .segment-display svg path,
 .segment-display svg circle {
-	fill: #eee;
+	fill: #f9f9f9;
 	stroke: #0e0;
 	stroke-opacity: 0;
 }
