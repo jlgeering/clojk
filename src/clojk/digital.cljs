@@ -96,7 +96,7 @@
     (js/setInterval (fn [] (swap! state update-in [:time] t/now)) 200)
     a))
 
-(defcard current-time
+(defcard current-time-utc
   (fn [data-atom _]
     (let [now (:time @data-atom)
           time (ct/get-time now)]

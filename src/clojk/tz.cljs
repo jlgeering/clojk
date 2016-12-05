@@ -27,7 +27,7 @@
 
 (defcard state-observer state {} {:history false})
 
-(defcard current-time
+(defcard current-time-utc
   (fn [data-atom _]
     (sab/html (let [now (:time @data-atom)
                     time (ct/get-time now)]

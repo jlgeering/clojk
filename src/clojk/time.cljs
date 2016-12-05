@@ -5,14 +5,14 @@
    [clojure.string :as str]))
 
 (def custom-formatter (tf/formatter "HH mm ss"))
-(defn format-time [date]
-  (tf/unparse custom-formatter date))
+(defn format-time [dt]
+  (tf/unparse custom-formatter dt))
 
-(defn time-vec [date]
-  (str/split (format-time date) " "))
+(defn time-vec [dt]
+  (str/split (format-time dt) " "))
 
-(defn get-time [date]
-  (let [time (time-vec date)]
+(defn get-time [dt]
+  (let [time (time-vec dt)]
     {:h (get time 0)
      :m (get time 1)
      :s (get time 2)}))
