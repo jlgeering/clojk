@@ -2,9 +2,9 @@
   (:require
    [cljs-time.core :as t]
    [clojk.time :as ct]
-   [sablono.core :as sab :include-macros true])
+   [reagent.core :as r])
   (:require-macros
-   [devcards.core :as dc :refer [defcard deftest]]))
+   [devcards.core :as dc :refer [defcard defcard-rg deftest]]))
 
 ;-------------------------------------------------------------------------------
 
@@ -14,4 +14,3 @@
     a))
 
 (defcard state-observer state {} {:history false})
-

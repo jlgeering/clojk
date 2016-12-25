@@ -10,19 +10,11 @@
                  [org.clojure/clojurescript "1.9.293"]
                  [com.andrewmcveigh/cljs-time "0.4.0"]
                  [devcards "0.2.2"]
-                 [sablono "0.7.6"]
+                 [reagent "0.6.0"]]
 
-                 ;; need to specify this for sablono
-                 ;; when not using devcards
-                 [cljsjs/react "15.4.0-0"]
-                 [cljsjs/react-dom "15.4.0-0"]
-                 [cljsjs/react-dom-server "15.4.0-0"]
-
-                 #_[org.omcljs/om "0.9.0"]
-                 #_[reagent "0.5.1"]]
-
-  :plugins [[lein-figwheel "0.5.8"]
-            [lein-cljsbuild "1.1.4" :exclusions [org.clojure/clojure]]]
+  :plugins [[lein-cljsbuild "1.1.5"]
+            ; [lein-cljsbuild "1.1.4" :exclusions [org.clojure/clojure]]
+            [lein-figwheel "0.5.8"]]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled"
                                     "target"]

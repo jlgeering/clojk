@@ -3,9 +3,9 @@
    [cljs-time.core :as t]
    [cljs-time.format :as tf]
    [clojure.string :as str]
-   [sablono.core :as sab :include-macros true])
+   [reagent.core :as r])
   (:require-macros
-   [devcards.core :as dc :refer [defcard deftest]]))
+   [devcards.core :as dc :refer [defcard defcard-rg deftest]]))
 
 (defn to-local [dt]
   (t/to-default-time-zone dt))
@@ -27,12 +27,12 @@
 
 (defn time-div [dt]
   (let [time (get-time dt)]
-    [:div {:class "time"}
-     [:span {:class "hours"} (:h time)]
+    [:div.time
+     [:span.hours (:h time)]
      [:span ":"]
-     [:span {:class "minutes"} (:m time)]
+     [:span.minutes (:m time)]
      [:span ":"]
-     [:span {:class "seconds"} (:s time)]]))
+     [:span.seconds (:s time)]]))
 
 ;-------------------------------------------------------------------------------
 
@@ -45,13 +45,13 @@
 
 (defcard current-time-utc
   (fn [data-atom _]
-    (sab/html (let [now (:time @data-atom)]
-                (time-div now))))
+    (r/as-element (let [now (:time @data-atom)]
+                    (time-div now))))
   state
   #_{:inspect-data true})
 
 (defcard current-time-local
   (fn [data-atom _]
-    (sab/html (let [now (to-local (:time @data-atom))]
-                (time-div now))))
+    (r/as-element (let [now (to-local (:time @data-atom))]
+                    (time-div now))))
   state)
