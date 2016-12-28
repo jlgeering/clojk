@@ -30,9 +30,9 @@
                                     :output-to  "resources/public/js/compiled/clojk_devcards.js"
                                     :output-dir "resources/public/js/compiled/devcards_out"
                                     :source-map-timestamp true}}
-                       {:id "gh-pages"
+                       {:id "docs-devcards"
                         :source-paths ["src"]
-                        :compiler { :main "clojk.gh-pages"
+                        :compiler { :main "clojk.docs.devcards"
                                     :devcards true
                                     :asset-path "js/compiled/cards"
                                     :output-to  "docs/js/compiled/clojk.js"
@@ -52,4 +52,9 @@
                                    :output-to  "resources/public/js/compiled/clojk.js"
                                    :optimizations :advanced}}]}
 
-  :figwheel { :css-dirs ["resources/public/css"]})
+  :figwheel { :css-dirs ["resources/public/css"]}
+
+  ; :aliases {"build-docs" ["do" "clean" ["cljsbuild" "once" "docs-index"] ["cljsbuild" "once" "docs-devcards"]]}
+  :aliases {"build-docs" ["cljsbuild" "once" "docs-devcards"]}
+  
+  )

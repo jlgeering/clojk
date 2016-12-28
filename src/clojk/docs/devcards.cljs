@@ -1,4 +1,4 @@
-(ns clojk.gh-pages
+(ns clojk.docs.devcards
   (:require
    [clojk.digital]
    [clojk.tz]
