@@ -1,0 +1,4 @@
+# reproduce gh-pages setup (without ssl)
+
+localhost:{$PORT}/clojk/
+root docs

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# doesn't resolve symlinks (i.e. do not symlink this file)
+SCRIPT_DIR=$( cd "$(dirname "$0")" ; pwd -P )
+BASE_DIR=$(dirname "$SCRIPT_DIR")
+
+# check for stdout (fd 1)
+if [ -t 1 ]
+then
+	DOCKER_OPTIONS="-it"
+else
+	DOCKER_OPTIONS="-i"
+fi
+
+# get a random free port if $PORT is not provided
+if [ -z "$PORT" ]; then
+	# see http://unix.stackexchange.com/questions/55913/whats-the-easiest-way-to-find-an-unused-local-port
+	PORT=$(python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()')
+fi
+
+echo "starting caddy webserver on http://localhost:$PORT/clojk/"
+
+exec docker run $DOCKER_OPTIONS --rm \
+	-e "USER_ID=$(id -u)" \
+	-e "GROUP_ID=$(id -g)" \
+	-e PORT=$PORT \
+	-p "$PORT:$PORT" \
+	-v $BASE_DIR:/var/www/html:ro \
+	-v $BASE_DIR/.caddy:/.caddy:rw \
+	joshix/caddy
