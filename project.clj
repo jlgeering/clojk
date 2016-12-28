@@ -30,6 +30,13 @@
                                     :output-to  "resources/public/js/compiled/clojk_devcards.js"
                                     :output-dir "resources/public/js/compiled/devcards_out"
                                     :source-map-timestamp true}}
+                       {:id "gh-pages"
+                        :source-paths ["src"]
+                        :compiler { :main "clojk.gh-pages"
+                                    :devcards true
+                                    :asset-path "js/compiled/cards"
+                                    :output-to  "docs/js/compiled/clojk.js"
+                                    :optimizations :advanced}}
                        {:id "dev"
                         :source-paths ["src"]
                         :figwheel true
