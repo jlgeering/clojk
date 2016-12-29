@@ -2,3 +2,4 @@
 
 localhost:{$PORT}/clojk/
 root docs
+log / stdout

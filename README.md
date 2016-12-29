@@ -16,6 +16,6 @@ cp resources/public/css/clojk_style.css docs/css/clojk_style.css
 check the build locally
 
 ```
-./bin/serve-docs
+env PORT=8080 ./bin/serve-docs
 ```
 
