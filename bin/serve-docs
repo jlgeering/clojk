@@ -18,7 +18,9 @@ if [ -z "$PORT" ]; then
 	PORT=$(python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()')
 fi
 
-echo "starting caddy webserver on http://localhost:$PORT/clojk/"
+echo "starting caddy webserver ..."
+echo "index on http://localhost:$PORT/clojk/"
+echo "devcards on http://localhost:$PORT/clojk/devcards.html"
 
 exec docker run $DOCKER_OPTIONS --rm \
 	-e "USER_ID=$(id -u)" \

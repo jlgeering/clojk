@@ -1,10 +1,6 @@
 (ns clojk.digital
   (:require
-   [cljs-time.core :as t]
-   [clojk.time :as ct]
-   [reagent.core :as r])
-  (:require-macros
-   [devcards.core :as dc :refer [defcard defcard-rg deftest]]))
+   [clojk.time :as ct]))
 
 (defn seven-segment-display [segment-classes segment-default]
   [:g {:class "segments"}
@@ -44,69 +40,16 @@
    (str digits)))
 
 (defn clock-display [h m s sep]
-  (r/as-element [:div {:class "segment-display"}
-                 [:svg {:width 410 :height 96 :viewBox "0 0 410 96"}
-                  [:g {:transform "skewX(-9)"}
-                   [:g {:transform "translate( 15,0)"} (digits-display h)]
-                   [:g {:transform "translate(143,0)"} (separator sep)]
-                   [:g {:transform "translate(155,0)"} (digits-display m)]
-                   [:g {:transform "translate(283,0)"} (separator sep)]
-                   [:g {:transform "translate(295,0)"} (digits-display s)]]]]))
+  [:div {:class "segment-display"}
+   [:svg {:width 410 :height 96 :viewBox "0 0 410 96"}
+    [:g {:transform "skewX(-9)"}
+     [:g {:transform "translate( 15,0)"} (digits-display h)]
+     [:g {:transform "translate(143,0)"} (separator sep)]
+     [:g {:transform "translate(155,0)"} (digits-display m)]
+     [:g {:transform "translate(283,0)"} (separator sep)]
+     [:g {:transform "translate(295,0)"} (digits-display s)]]]])
 
-; ----------------------------------------------------
-
-(defcard seven-segment-display
-  (r/as-element [:div.segment-display
-                 [:svg {:width 375 :height 96 :viewBox "0 0 375 96"}
-                  [:g {:transform "translate(0,0)"}
-                   (seven-segment-display {} "off")
-                   [:g {:transform "translate( 60,0)"} (separator "off")]]]]))
-
-(defcard seven-segment-display-lit
-  (r/as-element [:div.segment-display
-                 [:svg {:width 375 :height 96 :viewBox "0 0 375 96"}
-                  [:g {:transform "translate(0,0)"}
-                   (seven-segment-display {} "lit")
-                   [:g {:transform "translate( 60,0)"} (separator "lit")]]]]))
-
-(defcard digits
-  (r/as-element [:div.segment-display
-                 [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
-                  [:g {:transform "translate(  0,0)"} (digit-display \1)]
-                  [:g {:transform "translate( 60,0)"} (digit-display \2)]
-                  [:g {:transform "translate(120,0)"} (digit-display \3)]
-                  [:g {:transform "translate(180,0)"} (digit-display \4)]
-                  [:g {:transform "translate(240,0)"} (digit-display \5)]
-                  [:g {:transform "translate(300,0)"} (digit-display \6)]
-                  [:g {:transform "translate(360,0)"} (digit-display \7)]
-                  [:g {:transform "translate(420,0)"} (digit-display \8)]
-                  [:g {:transform "translate(480,0)"} (digit-display \9)]
-                  [:g {:transform "translate(540,0)"} (digit-display \0)]]]))
-
-(defcard number-strings
-  (r/as-element [:div.segment-display
-                 [:svg {:width 600 :height 96 :viewBox "0 0 600 96"}
-                  (digits-display "0123456789")]]))
-
-(defcard static-clock
-  (clock-display "12" "34" "56" "lit"))
-
-(defonce state
-  (let [a (atom {:time 0})]
-    (js/setInterval (fn [] (swap! state update-in [:time] t/now)) 200)
-    a))
-
-(defcard current-time-utc
-  (fn [data-atom _]
-    (let [now (:time @data-atom)
-          time (ct/get-time now)]
-      (clock-display (:h time) (:m time) (:s time) "lit")))
-  state
-  {:inspect-data true})
-
-(defcard current-time-local
-  (fn [data-atom _]
-    (let [now (ct/to-local (:time @data-atom))
-          time (ct/get-time now)]
-      (clock-display (:h time) (:m time) (:s time) "lit")))
-  state)
+(defn clock-component-local []
+  (let [local (ct/to-local @ct/now)
+        time (ct/get-time local)]
+    [clock-display (:h time) (:m time) (:s time) "lit"]))

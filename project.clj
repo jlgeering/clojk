@@ -16,6 +16,7 @@
             ; [lein-cljsbuild "1.1.4" :exclusions [org.clojure/clojure]]
             [lein-figwheel "0.5.8"]]
 
+  ; todo add docs/js/compiled ?
   :clean-targets ^{:protect false} ["resources/public/js/compiled"
                                     "target"]
 
@@ -24,18 +25,26 @@
   :cljsbuild {
               :builds [{:id "devcards"
                         :source-paths ["src"]
-                        :figwheel { :devcards true} ;; <- note this
-                        :compiler { :main       "clojk.core"
+                        :figwheel { :devcards true } ;; <- note this
+                        :compiler { :main       "clojk.cards.index"
                                     :asset-path "js/compiled/devcards_out"
                                     :output-to  "resources/public/js/compiled/clojk_devcards.js"
                                     :output-dir "resources/public/js/compiled/devcards_out"
                                     :source-map-timestamp true}}
+                       {:id "docs-index"
+                        :source-paths ["src"]
+                        :compiler { :main "clojk.docs.core"
+                                    :asset-path "js/compiled/out"
+                                    :output-to  "docs/js/compiled/clojk.js"
+                                    :output-dir "target/docs/out"
+                                    :optimizations :advanced}}
                        {:id "docs-devcards"
                         :source-paths ["src"]
                         :compiler { :main "clojk.docs.devcards"
                                     :devcards true
                                     :asset-path "js/compiled/cards"
-                                    :output-to  "docs/js/compiled/clojk.js"
+                                    :output-to  "docs/js/compiled/clojk_devcards.js"
+                                    :output-dir "target/docs/cards"
                                     :optimizations :advanced}}
                        {:id "dev"
                         :source-paths ["src"]
@@ -43,18 +52,19 @@
                         :compiler {:main       "clojk.core"
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/clojk.js"
-                                   :output-dir "resources/public/js/compiled/out"
+                                   :output-dir "resources/public/js/compiled/out_dev"
                                    :source-map-timestamp true}}
                        {:id "prod"
                         :source-paths ["src"]
                         :compiler {:main       "clojk.core"
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/clojk.js"
+                                   :output-dir "resources/public/js/compiled/out"
                                    :optimizations :advanced}}]}
 
   :figwheel { :css-dirs ["resources/public/css"]}
 
   ; :aliases {"build-docs" ["do" "clean" ["cljsbuild" "once" "docs-index"] ["cljsbuild" "once" "docs-devcards"]]}
-  :aliases {"build-docs" ["cljsbuild" "once" "docs-devcards"]}
+  :aliases {"build-docs" ["cljsbuild" "once" "docs-index" "docs-devcards"]}
   
   )

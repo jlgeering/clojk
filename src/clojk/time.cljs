@@ -3,9 +3,7 @@
    [cljs-time.core :as t]
    [cljs-time.format :as tf]
    [clojure.string :as str]
-   [reagent.core :as r])
-  (:require-macros
-   [devcards.core :as dc :refer [defcard defcard-rg deftest]]))
+   [reagent.core :as r]))
 
 (defn to-local [dt]
   (t/to-default-time-zone dt))
@@ -36,22 +34,12 @@
 
 ;-------------------------------------------------------------------------------
 
-(defonce state
-  (let [a (atom {:time 0})]
-    (js/setInterval (fn [] (swap! state update-in [:time] t/now)) 200)
-    a))
+; (defonce now
+;   (let [a (r/atom (t/now))]
+;     (js/setInterval #(reset! a (t/now)) 200)
+;     a))
 
-(defcard state-observer state {} {:history false})
+; same as above
+(defonce now (r/atom (t/now)))
+(defonce now-updater (js/setInterval #(reset! now (t/now)) 200))
 
-(defcard current-time-utc
-  (fn [data-atom _]
-    (r/as-element (let [now (:time @data-atom)]
-                    (time-div now))))
-  state
-  #_{:inspect-data true})
-
-(defcard current-time-local
-  (fn [data-atom _]
-    (r/as-element (let [now (to-local (:time @data-atom))]
-                    (time-div now))))
-  state)
