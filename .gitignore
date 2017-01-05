@@ -1,4 +1,5 @@
 resources/public/js/compiled
+resources/public/css/main.css
 figwheel_server.log
 target
 .lein-failures

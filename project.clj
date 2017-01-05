@@ -14,7 +14,8 @@
 
   :plugins [[lein-cljsbuild "1.1.5"]
             ; [lein-cljsbuild "1.1.4" :exclusions [org.clojure/clojure]]
-            [lein-figwheel "0.5.8"]]
+            [lein-figwheel "0.5.8"]
+            [lein-sass "0.4.0"]]
 
   ; todo add docs/js/compiled ?
   :clean-targets ^{:protect false} ["resources/public/js/compiled"
@@ -22,6 +23,16 @@
 
   :source-paths ["src"]
 
+  :sass {:src "resources/sass"
+         :output-directory "resources/public/css"
+
+         ;; other options (provided are default values):
+         ;; :delete-output-dir true
+         ;; :source-maps true
+         ;; :style :nested
+         ;; :command :sassc (:sass or :sassc are recognized values)
+         }
+  
   :cljsbuild {
               :builds [{:id "devcards"
                         :source-paths ["src"]
