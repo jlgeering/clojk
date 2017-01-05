@@ -1,4 +1,8 @@
 /* clojk CSS */
+.segment-display svg {
+	max-width: 100%;
+}
+
 .segment-display svg path,
 .segment-display svg circle {
 	fill: #f9f9f9;
